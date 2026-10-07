@@ -17,11 +17,11 @@ app.set('views', './views');
 
 // Cấu hình Stateless Session lưu trực tiếp trên Cloud MongoDB Atlas
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: process.env.SESSION_SECRET || 'secretkey',
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl: process.env.MONGODB_WRITE_URI, // Lưu session trực tiếp lên MongoDB Atlas
+    mongoUrl: process.env.MONGODB_READ_URI, // hoặc MONGODB_WRITE_URI
     collectionName: 'sessions'
   }),
   cookie: { maxAge: 1000 * 60 * 60 * 24 } // 1 ngày
