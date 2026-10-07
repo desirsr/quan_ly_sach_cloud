@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Quản lý Sách</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    footer { margin-top: 30px; border-top: 1px solid #ccc; padding-top: 10px; font-weight: bold; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+  </style>
+</head>
+<body>
+  <h1>Hệ Thống Quản Lý Sách</h1>
+
+  <h2>Thêm Sách Mới</h2>
+  <form action="/add-book" method="POST">
+    <input type="text" name="productCode" placeholder="Mã SP (Bắt đầu bằng {{mssv}}...)" required>
+    <input type="text" name="title" placeholder="Tên sách" required>
+    <input type="number" name="originalPrice" placeholder="Giá gốc" required>
+    <button type="submit">Thêm sách</button>
+  </form>
+
+  <h2>Danh Sách Sách</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Mã SP</th>
+        <th>Tên sách</th>
+        <th>Giá gốc (VNĐ)</th>
+        <th>Giá sau thuế (VNĐ)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each books}}
+      <tr>
+        <td>{{this.productCode}}</td>
+        <td>{{this.title}}</td>
+        <td>{{this.originalPrice}}</td>
+        <td>{{this.finalPrice}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <!-- Footer bắt buộc hiển thị Họ tên, MSSV và mức VAT -->
+  <footer>
+    <p>Họ và Tên: {{studentName}} | MSSV: {{mssv}} | Mức VAT áp dụng: {{vatRate}}%</p>
+  </footer>
+</body>
+</html>
